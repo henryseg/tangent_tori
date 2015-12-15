@@ -10,9 +10,15 @@ var mouseY = 1;
 
 
 // one quaternion per monkey
-var polychoraList = ["8_torus","8_torus_plus_frame","8_two_tori","8_two_tori_plus_frame","24","24dual","24both","48","120"];
+var polychoraList = ["8_torus","8_torus_plus_frame","8_two_tori","8_two_tori_plus_frame",
+"vert_centered_torus","vert_centered_torus_with_frame",
+"vert_centered_two_tori","vert_centered_two_tori_with_frame",
+"24","24dual","24both","48","120"];
 var polychoron = polychoraList[0];
-var quatPerMonkeyArrayDict = { "8_torus": centers_8_cell,"8_torus_plus_frame": centers_8_cell, "8_two_tori": centers_8_cell, "8_two_tori_plus_frame": centers_8_cell, "24": centers_24_cell, "24dual": centers_24_cell_dual, "24both": centers_24_cell_dual.concat(centers_24_cell), "48": centers_24_cell_dual.concat(centers_24_cell), "120": centers_120_cell};
+var quatPerMonkeyArrayDict = { "8_torus": centers_8_cell,"8_torus_plus_frame": centers_8_cell, "8_two_tori": centers_8_cell, 
+"8_two_tori_plus_frame": centers_8_cell, "vert_centered_torus": centers_8_cell, "vert_centered_torus_with_frame": centers_8_cell, 
+"vert_centered_two_tori": centers_8_cell, "vert_centered_two_tori_with_frame": centers_8_cell, 
+"24": centers_24_cell, "24dual": centers_24_cell_dual, "24both": centers_24_cell_dual.concat(centers_24_cell), "48": centers_24_cell_dual.concat(centers_24_cell), "120": centers_120_cell};
 
 // var quatPerMonkeyArray = centers_24_cell_dual.concat(centers_24_cell);
 var quatPerMonkeyArray = quatPerMonkeyArrayDict[polychoron];
@@ -20,19 +26,29 @@ var quatPerMonkeyArray = quatPerMonkeyArrayDict[polychoron];
 var numMonkeys = quatPerMonkeyArray.length;
 var matArray = new Array(numMonkeys);
 
-var travelDirDict = {"8_torus": centers_8_cell[5], "8_torus_plus_frame": centers_8_cell[5],"8_two_tori": centers_8_cell[5], "8_two_tori_plus_frame": centers_8_cell[5], "24": centers_24_cell_dual[4], "24dual": centers_24_cell_dual[4], "24both": centers_24_cell_dual[4], "48":centers_24_cell[16], "120": centers_120_cell[3]};
+var travelDirDict = {"8_torus": centers_8_cell[5], "8_torus_plus_frame": centers_8_cell[5],"8_two_tori": centers_8_cell[5], 
+"8_two_tori_plus_frame": centers_8_cell[5], "vert_centered_torus": centers_8_cell[5], "vert_centered_torus_with_frame": centers_8_cell[5], 
+"vert_centered_two_tori": centers_8_cell[5], "vert_centered_two_tori_with_frame": centers_8_cell[5], 
+"24": centers_24_cell_dual[4], "24dual": centers_24_cell_dual[4], "24both": centers_24_cell_dual[4], "48":centers_24_cell[16], "120": centers_120_cell[3]};
 
 var travelDir = travelDirDict[polychoron];  //for 24-cell_dual //4 is down head/foot.  //12 is (0,0,0,1)
 var colourDir = travelDir;
 var HopfColorMatrix = makeHopfColorMatrix(colourDir);
 
-var modelScaleDict = {"8_torus":1, "8_torus_plus_frame":1, "8_two_tori":1, "8_two_tori_plus_frame":1, "24":50, "24dual":50, "24both":50, "48": 2.4,"120":3.07768}
+var modelScaleDict = {"8_torus":1, "8_torus_plus_frame":1, "8_two_tori":1, 
+"8_two_tori_plus_frame":1, "vert_centered_torus":1, "vert_centered_torus_with_frame":1, 
+"vert_centered_two_tori":1, "vert_centered_two_tori_with_frame":1, 
+"24":50, "24dual":50, "24both":50, "48": 2.4,"120":3.07768}
 var modelScale = modelScaleDict[polychoron];
 
 var modelFileNameDict = {"8_torus":'media/hyp_parab_windows3.obj', 
 "8_torus_plus_frame": 'media/hyp_parab_windows_and_frame4.obj',
 "8_two_tori":'media/two_hyp_parabs_windows3.obj',
 "8_two_tori_plus_frame":'media/two_hyp_parabs_windows_and_frame4.obj',
+"vert_centered_torus":'media/vert_centered_hyp_parab.obj',
+"vert_centered_torus_with_frame":'media/vert_centered_hyp_parab_with_frame.obj',
+"vert_centered_two_tori":'media/vert_centered_two_hyp_parab.obj',
+"vert_centered_two_tori_with_frame":'media/vert_centered_two_hyp_parab_with_frame.obj',
 "24":'media/24-cell_monkey_lowpoly_001_cen-vert_50_flip.obj',
 "24dual":'media/24-cell_monkey_lowpoly_001_cen-vert_50_flip.obj',
 "24both":'media/24-cell_monkey_lowpoly_001_cen-vert_50_flip.obj',
@@ -185,7 +201,7 @@ function animate() {
 
 //listen for click
 function onclick() {
-  var selected = (currSelected) % 6 + 1;
+  var selected = (currSelected) % 8 + 1;
   changePolychoron(selected);
   effect.setFullScreen( true );
   if (typeof window.screen.orientation !== 'undefined' && typeof window.screen.orientation.lock === 'function') {
@@ -225,7 +241,7 @@ document.addEventListener('keydown', function(event) { selectPolychora(event); }
 function selectPolychora(event) {
   var keySelect = event.keyCode - 48; //1 is 49
 
-  if (keySelect > 0 && keySelect < 7){
+  if (keySelect > 0 && keySelect <= 8){
     changePolychoron(keySelect);
   }
 }
