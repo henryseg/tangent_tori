@@ -30,9 +30,9 @@ var modelScaleDict = {"8_torus":1, "8_torus_plus_frame":1, "8_two_tori":1, "8_tw
 var modelScale = modelScaleDict[polychoron];
 
 var modelFileNameDict = {"8_torus":'media/hyp_parab_windows3.obj', 
-"8_torus_plus_frame": 'media/hyp_parab_windows_and_frame3.obj',
+"8_torus_plus_frame": 'media/hyp_parab_windows_and_frame4.obj',
 "8_two_tori":'media/two_hyp_parabs_windows3.obj',
-"8_two_tori_plus_frame":'media/two_hyp_parabs_windows_and_frame3.obj',
+"8_two_tori_plus_frame":'media/two_hyp_parabs_windows_and_frame4.obj',
 "24":'media/24-cell_monkey_lowpoly_001_cen-vert_50_flip.obj',
 "24dual":'media/24-cell_monkey_lowpoly_001_cen-vert_50_flip.obj',
 "24both":'media/24-cell_monkey_lowpoly_001_cen-vert_50_flip.obj',
